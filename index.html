@@ -32,7 +32,7 @@ html,body{
 }
 ::selection{background:#C9982C;color:#000}
 
-/* —— FULL SCREEN PANELS —— */
+/* ââ FULL SCREEN PANELS ââ */
 .screen{
   display:grid;
   width:100vw;height:100vh;
@@ -105,7 +105,7 @@ html,body{
 }
 .panel:hover .grid-lines{opacity:1}
 
-/* —— HEADER BLOCK (top of each panel) —— */
+/* ââ HEADER BLOCK (top of each panel) ââ */
 .panel-header{
   position:absolute;top:0;left:0;right:0;
   padding:1.75rem 2rem;
@@ -139,7 +139,7 @@ html,body{
 }
 .panel:hover .panel-num{color:rgba(255,255,255,0.5)}
 
-/* —— CONTENT (bottom) —— */
+/* ââ CONTENT (bottom) ââ */
 .panel-content{
   position:relative;z-index:10;
   display:flex;flex-direction:column;gap:1.25rem;
@@ -168,7 +168,7 @@ html,body{
   line-height:1.15;letter-spacing:-0.03em;
 }
 
-/* Description — hidden, slides up on hover */
+/* Description â hidden, slides up on hover */
 .biz-desc{
   font-size:13px;color:rgba(255,255,255,0.55);
   font-weight:300;line-height:1.75;
@@ -227,7 +227,7 @@ html,body{
 .panel:hover .biz-icon-lg{opacity:0.12;transform:scale(1.1)}
 .biz-icon-lg svg{width:80px;height:80px}
 
-/* —— CENTER TITLE (over panels) —— */
+/* ââ CENTER TITLE (over panels) ââ */
 .center-title{
   position:fixed;
   top:50%;left:50%;
@@ -283,7 +283,7 @@ html,body{
 @keyframes blink{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(255,209,102,0.5)}55%{opacity:.6;box-shadow:0 0 0 7px rgba(255,209,102,0)}}
 .ct-pill-txt{font-family:var(--fm);font-size:10px;color:rgba(255,209,102,0.8);letter-spacing:0.06em}
 
-/* —— HOVER HINT (bottom center) —— */
+/* ââ HOVER HINT (bottom center) ââ */
 .hover-hint{
   position:fixed;bottom:1.75rem;left:50%;
   transform:translateX(-50%);
@@ -296,32 +296,33 @@ html,body{
 .screen:hover .hover-hint{opacity:.32}
 .hint-line{width:28px;height:1px;background:rgba(255,255,255,0.15)}
 
-/* —— PANEL-SPECIFIC COLORS —— */
-/* Blue — Cognisive */
+/* ââ PANEL-SPECIFIC COLORS ââ */
+/* Blue â Cognisive */
 .p1-accent{background:linear-gradient(90deg,#3B82F6,#60A5FA)}
 .p1-sector{background:rgba(59,130,246,0.12);color:#60A5FA;border:1px solid rgba(59,130,246,0.2)}
 .p1-link{background:rgba(59,130,246,0.08);border-color:rgba(59,130,246,0.25);color:#93C5FD}
 .p1-link:hover{background:rgba(59,130,246,0.18) !important;border-color:rgba(59,130,246,0.5) !important}
 
-/* Teal — Kloud Course */
+/* Teal â Kloud Course */
 .p2-accent{background:linear-gradient(90deg,#10B981,#34D399)}
 .p2-sector{background:rgba(16,185,129,0.12);color:#34D399;border:1px solid rgba(16,185,129,0.2)}
 .p2-link{background:rgba(16,185,129,0.08);border-color:rgba(16,185,129,0.25);color:#6EE7B7}
 .p2-link:hover{background:rgba(16,185,129,0.18) !important;border-color:rgba(16,185,129,0.5) !important}
 
-/* Amber — Agro */
+/* Amber â Agro */
 .p3-accent{background:linear-gradient(90deg,#F59E0B,#FCD34D)}
 .p3-sector{background:rgba(245,158,11,0.12);color:#FCD34D;border:1px solid rgba(245,158,11,0.2)}
 .p3-link{background:rgba(245,158,11,0.08);border-color:rgba(245,158,11,0.25);color:#FDE68A}
 .p3-link:hover{background:rgba(245,158,11,0.18) !important;border-color:rgba(245,158,11,0.5) !important}
 
-/* Green — Poultry */
+/* Green â Poultry */
 .p4-accent{background:linear-gradient(90deg,#22C55E,#4ADE80)}
 .p4-sector{background:rgba(34,197,94,0.12);color:#4ADE80;border:1px solid rgba(34,197,94,0.2)}
 .p4-link{background:rgba(34,197,94,0.08);border-color:rgba(34,197,94,0.25);color:#86EFAC}
 .p4-link:hover{background:rgba(34,197,94,0.18) !important;border-color:rgba(34,197,94,0.5) !important}
 
-/* —— CONTACT CTA —— */
+
+/* ââ CONTACT CTA ââ */
 .contact-cta{
   position:fixed;
   right:1.75rem;
@@ -351,119 +352,42 @@ html,body{
   background:#0A0F1E;
 }
 
-/* —— MOBILE FALLBACK —— */
+/* ââ MOBILE FALLBACK ââ */
 @media(max-width:768px){
   html,body{overflow:auto;height:auto}
-
   .screen{
-    display:flex;
-    flex-direction:column;
-    width:100%;
+    display:grid;
+    grid-template-columns:1fr !important;
     height:auto;
   }
-
   .panel{
-    min-height:auto;
-    width:100%;
-    border-right:none;
-    border-bottom:1px solid rgba(255,255,255,0.07);
+    min-height:56vw;
+    border-right:none;border-bottom:1px solid rgba(255,255,255,0.07);
     transform:none !important;
     filter:none !important;
-    padding:0;
-    justify-content:flex-start;
   }
   .panel:last-child{border-bottom:none}
-
-  /* Panel header centered on mobile */
-  .panel-header{
-    position:relative;
-    top:auto;left:auto;right:auto;
-    padding:1.25rem 1.5rem;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    gap:6px;
-    text-align:center;
-  }
-
-  .panel-num{
-    font-size:9px;
-    color:rgba(255,255,255,0.25);
-  }
-
-  /* Panel content always visible on mobile */
-  .panel-content{
-    padding:1.25rem 1.5rem 1.75rem;
-  }
-
-  .biz-desc{
-    max-height:none !important;
-    opacity:1 !important;
-    transform:none !important;
-  }
-  .biz-tags{
-    max-height:none !important;
-    opacity:1 !important;
-    transform:none !important;
-  }
-  .visit-link{
-    opacity:1 !important;
-    transform:none !important;
-  }
-
-  .accent-bar{width:60px !important}
-
-  /* —— CENTER TITLE on mobile: static block at top —— */
-  .center-title{
-    position:relative;
-    top:auto;
-    left:auto;
-    transform:none;
-    width:100%;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:10px;
-    padding:2.25rem 1.5rem 2rem;
-    border-radius:0;
-    background:linear-gradient(160deg,#0A0F1E 0%,#0D1A3A 60%,#0F2050 100%);
-    border:none;
-    border-bottom:1px solid rgba(255,255,255,0.08);
-    box-shadow:none;
-    backdrop-filter:none;
-    -webkit-backdrop-filter:none;
-    pointer-events:auto;
-    order:-1;
-  }
-
-  /* Override hover transform on mobile */
-  .screen:hover .center-title{
-    transform:none;
-    opacity:1;
-    background:linear-gradient(160deg,#0A0F1E 0%,#0D1A3A 60%,#0F2050 100%);
-  }
-
-  .ct-h{
-    font-size:clamp(26px,7vw,36px);
-  }
-
-  .ct-pill-txt{
-    font-size:9px;
-  }
-
+  .biz-desc{max-height:none !important;opacity:1 !important}
+  .biz-tags{max-height:none !important;opacity:1 !important}
+  .visit-link{opacity:1 !important;transform:none !important}
+  .center-title{display:flex}
   .hover-hint{display:none}
-
   .contact-cta{
-    position:relative;
+    position:sticky;
     right:auto;
     bottom:auto;
-    margin:1.25rem auto;
-    display:flex;
+    margin:1rem auto 1.25rem;
     justify-content:center;
-    width:calc(100% - 3rem);
+    width:calc(100% - 2rem);
     max-width:360px;
   }
+.panel-header{
+  padding:1.25rem 1.5rem;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}  
+.panel-content{padding:1.5rem}
 }
 </style>
 </head>
@@ -471,22 +395,7 @@ html,body{
 
 <div class="screen">
 
-  <!-- Center floating title — appears first on mobile via order:-1 -->
-  <div class="center-title">
-    <div class="ct-tag">Kurela Group of Companies · Since 2016</div>
-    <div class="ct-line">
-      <div class="ct-divider"></div>
-      <div class="ct-h">Building Future-Ready<br><em>Businesses</em></div>
-      <div class="ct-divider"></div>
-    </div>
-    <div class="ct-sub">Technology &nbsp;·&nbsp; Skilling &nbsp;·&nbsp; Agriculture &nbsp;·&nbsp; Poultry Sciences</div>
-    <div class="ct-pill">
-      <div class="ct-dot"></div>
-      <span class="ct-pill-txt">Agri &amp; Trainings since 2016 · Technology since 2018</span>
-    </div>
-  </div>
-
-  <!-- —— PANEL 1 — KURELA COGNISIVE (Blue) —— -->
+  <!-- ââ PANEL 1 â KURELA COGNISIVE (Blue) ââ -->
   <div class="panel panel-1" data-url="https://kurela.in" role="link" tabindex="0" aria-label="Visit Kurela Cognisive website">
     <div class="glow"></div>
     <div class="grid-lines"></div>
@@ -507,7 +416,7 @@ html,body{
       <div class="accent-bar p1-accent"></div>
       <div class="sector p1-sector">Technology &amp; Skilling</div>
       <div class="biz-name">Kurela<br>Cognisive</div>
-      <div class="biz-desc">Product engineering, cloud services, digital transformation, and industry-aligned skilling — helping institutions, enterprises, and government programs build future-ready technology capabilities.</div>
+      <div class="biz-desc">Product engineering, cloud services, digital transformation, and industry-aligned skilling â helping institutions, enterprises, and government programs build future-ready technology capabilities.</div>
       <div class="biz-tags">
         <span class="tag">Product Engineering</span>
         <span class="tag">Managed Cloud</span>
@@ -516,12 +425,12 @@ html,body{
       </div>
       <a href="https://kurela.in" target="_blank" rel="noopener noreferrer" class="visit-link p1-link">
         kurela.in
-        <span class="visit-link-arr">↗</span>
+        <span class="visit-link-arr"></span>
       </a>
     </div>
   </div>
 
-  <!-- —— PANEL 2 — KLOUD COURSE (Teal) —— -->
+  <!-- ââ PANEL 2 â KLOUD COURSE (Teal) ââ -->
   <div class="panel panel-2" data-url="https://kloudcourse.in" role="link" tabindex="0" aria-label="Visit Kloud Course Academy website">
     <div class="glow"></div>
     <div class="grid-lines"></div>
@@ -548,12 +457,12 @@ html,body{
       </div>
       <a href="https://kloudcourse.in" target="_blank" rel="noopener noreferrer" class="visit-link p2-link">
         kloudcourse.in
-        <span class="visit-link-arr">↗</span>
+        <span class="visit-link-arr"></span>
       </a>
     </div>
   </div>
 
-  <!-- —— PANEL 3 — KURELA AGRO FARMS (Amber) —— -->
+  <!--  PANEL 3 KURELA AGRO FARMS (Amber)  -->
   <div class="panel panel-3" data-url="https://www.kurelaagrofarms.com" role="link" tabindex="0" aria-label="Visit Kurela Agro Farms website">
     <div class="glow"></div>
     <div class="grid-lines"></div>
@@ -571,7 +480,7 @@ html,body{
       <div class="accent-bar p3-accent"></div>
       <div class="sector p3-sector">Agriculture</div>
       <div class="biz-name">Kurela<br>Agro Farms</div>
-      <div class="biz-desc">Modern horticulture, alternative crops, precision farming, and sustainable agri-enterprise models — supporting farmers, landowners, students, and rural entrepreneurs.</div>
+      <div class="biz-desc">Modern horticulture, alternative crops, precision farming, and sustainable agri-enterprise models supporting farmers, landowners, students, and rural entrepreneurs.</div>
       <div class="biz-tags">
         <span class="tag">Horticulture</span>
         <span class="tag">Precision Farming</span>
@@ -580,12 +489,12 @@ html,body{
       </div>
       <a href="https://www.kurelaagrofarms.com" target="_blank" rel="noopener noreferrer" class="visit-link p3-link">
         kurelaagrofarms.com
-        <span class="visit-link-arr">↗</span>
+        <span class="visit-link-arr"></span>
       </a>
     </div>
   </div>
 
-  <!-- —— PANEL 4 — KURELA POULTRY SCIENCES (Green) —— -->
+  <!--  PANEL 4KURELA POULTRY SCIENCES (Green)  -->
   <div class="panel panel-4" data-url="https://kurelapoultry.com" role="link" tabindex="0" aria-label="Visit Kurela Poultry Sciences website">
     <div class="glow"></div>
     <div class="grid-lines"></div>
@@ -603,7 +512,7 @@ html,body{
       <div class="accent-bar p4-accent"></div>
       <div class="sector p4-sector">Poultry Sciences</div>
       <div class="biz-name">Kurela Poultry<br>Sciences</div>
-      <div class="biz-desc">Science-backed poultry farming solutions for EC broiler and layer farms — covering shed setup, automation, IoT monitoring, farm operations, and productivity-focused poultry models.</div>
+      <div class="biz-desc">Science-backed poultry farming solutions for EC broiler and layer farms covering shed setup, automation, IoT monitoring, farm operations, and productivity-focused poultry models.</div>
       <div class="biz-tags">
         <span class="tag">EC Broiler &amp; Layer</span>
         <span class="tag">IoT Management</span>
@@ -612,17 +521,33 @@ html,body{
       </div>
       <a href="https://kurelapoultry.com" target="_blank" rel="noopener noreferrer" class="visit-link p4-link">
         kurelapoultry.com
-        <span class="visit-link-arr">↗</span>
+        <span class="visit-link-arr"></span>
       </a>
     </div>
   </div>
 
-  <!-- Bottom hint -->
-  <div class="hover-hint">
-    <div class="hint-line"></div>
-    hover to explore each vertical
-    <div class="hint-line"></div>
+<!-- Center floating title -->
+<div class="center-title">
+  <div class="ct-tag">Kurela Group of Companies Â· Since 2016</div>
+  <div class="ct-line">
+    <div class="ct-divider"></div>
+    <div class="ct-h">Building Future-Ready<br><em>Businesses</em></div>
+    <div class="ct-divider"></div>
   </div>
+  <div class="ct-sub">Technology &nbsp;Â·&nbsp; Skilling &nbsp;Â·&nbsp; Agriculture &nbsp;Â·&nbsp; Poultry Sciences</div>
+  <div class="ct-pill">
+    <div class="ct-dot"></div>
+    <span class="ct-pill-txt">Agri &amp; Trainings since 2016 Â· Technology since 2018</span>
+  </div>
+</div>
+
+<!-- Bottom hint -->
+<div class="hover-hint">
+  <div class="hint-line"></div>
+  hover to explore each vertical
+  <div class="hint-line"></div>
+</div>
+
 
 </div><!-- /screen -->
 
