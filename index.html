@@ -397,10 +397,12 @@ html,body{
   }
   .panel{
     min-height:56vw;
-    border-right:none;border-bottom:1px solid rgba(255,255,255,0.07);
+    border-right:none;
+    border-bottom:1px solid rgba(255,255,255,0.07);
     transform:none !important;
     filter:none !important;
-    justify-content: flex-start;
+
+    justify-content: flex-start;  /* ✅ ADD THIS LINE */
   }
   .panel:last-child{border-bottom:none}
   .biz-desc{max-height:none !important;opacity:1 !important}
