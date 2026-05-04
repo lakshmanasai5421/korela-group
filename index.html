@@ -106,27 +106,12 @@ html,body{
 .panel:hover .grid-lines{opacity:1}
 
 /* ââ HEADER BLOCK (top of each panel) ââ */
-@media (max-width: 768px) {
-
-  .panel-1 .panel-header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-  }
-
-  .panel-1 .panel-num {
-    position: static;
-    margin-top: 5px;
-  }
-
+.panel-header{
+  position:absolute;top:0;left:0;right:0;
+  padding:1.75rem 2rem;
+  display:flex;align-items:center;justify-content:space-between;
+  z-index:10;
 }
-
-
-
-  
-
 
 /* Shown only on panel-1 */
 .brand{
