@@ -28,12 +28,11 @@ html,body{
   width:100%;height:100%;
   overflow:hidden;
   font-family:var(--fb);
-  height:100%;
   -webkit-font-smoothing:antialiased;
 }
 ::selection{background:#C9982C;color:#000}
 
-/* ââ FULL SCREEN PANELS ââ */
+/* —— FULL SCREEN PANELS —— */
 .screen{
   display:grid;
   width:100vw;height:100vh;
@@ -106,31 +105,13 @@ html,body{
 }
 .panel:hover .grid-lines{opacity:1}
 
-/* ââ HEADER BLOCK (top of each panel) ââ */
+/* —— HEADER BLOCK (top of each panel) —— */
 .panel-header{
   position:absolute;top:0;left:0;right:0;
   padding:1.75rem 2rem;
   display:flex;align-items:center;justify-content:space-between;
   z-index:10;
 }
-
-/* Shown only on panel-1 */
-.brand{
-  display:flex;align-items:center;gap:9px;
-  text-decoration:none;
-}
-.brand-box{
-  width:30px;height:30px;
-  border-radius:7px;
-  background:linear-gradient(135deg,#C9982C,#E8B84B);
-  display:flex;align-items:center;justify-content:center;
-  font-family:var(--fh);font-size:12px;font-weight:800;color:#050810;
-}
-.brand-name{
-  font-family:var(--fh);font-size:16px;font-weight:800;
-  color:#fff;letter-spacing:-0.02em;
-}
-.brand-name span{color:#FFD166}
 
 /* Panel number */
 .panel-num{
@@ -140,7 +121,7 @@ html,body{
 }
 .panel:hover .panel-num{color:rgba(255,255,255,0.5)}
 
-/* ââ CONTENT (bottom) ââ */
+/* —— CONTENT (bottom) —— */
 .panel-content{
   position:relative;z-index:10;
   display:flex;flex-direction:column;gap:1.25rem;
@@ -169,7 +150,7 @@ html,body{
   line-height:1.15;letter-spacing:-0.03em;
 }
 
-/* Description â hidden, slides up on hover */
+/* Description — hidden, slides up on hover */
 .biz-desc{
   font-size:13px;color:rgba(255,255,255,0.55);
   font-weight:300;line-height:1.75;
@@ -228,7 +209,7 @@ html,body{
 .panel:hover .biz-icon-lg{opacity:0.12;transform:scale(1.1)}
 .biz-icon-lg svg{width:80px;height:80px}
 
-/* ââ CENTER TITLE (over panels) ââ */
+/* —— CENTER TITLE (over panels) —— */
 .center-title{
   position:fixed;
   top:50%;left:50%;
@@ -236,7 +217,7 @@ html,body{
   z-index:50;
   pointer-events:none;
   display:flex;flex-direction:column;align-items:center;gap:8px;
-  padding:1rem 1.35rem 1.05rem;
+  padding:1.25rem 1.5rem 1.1rem;
   border-radius:22px;
   background:linear-gradient(180deg,rgba(5,8,16,0.62),rgba(5,8,16,0.34));
   border:1px solid rgba(255,255,255,0.08);
@@ -245,40 +226,38 @@ html,body{
   -webkit-backdrop-filter:blur(16px);
   transition:opacity 650ms ease, transform 650ms cubic-bezier(0.16,1,0.3,1), background 650ms ease;
 }
-.screen:hover .center-title{
-  opacity:.94;
-  transform:translate(-50%,-66%) scale(.93);
-  background:linear-gradient(180deg,rgba(5,8,16,0.52),rgba(5,8,16,0.26))
+.screen:hover .center-title{opacity:.94;transform:translate(-50%,-66%) scale(.93);background:linear-gradient(180deg,rgba(5,8,16,0.52),rgba(5,8,16,0.26))}
+
+/* Brand logo — used in panel-1 header AND center title */
+.brand{
+  display:flex;align-items:center;gap:9px;
+  text-decoration:none;
+  pointer-events:auto;
+  margin-bottom:2px;
 }
-.panel{
-  justify-content: flex-end;
+.brand-box{
+  width:32px;height:32px;
+  border-radius:8px;
+  background:linear-gradient(135deg,#C9982C,#E8B84B);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--fh);font-size:13px;font-weight:800;color:#050810;
+  flex-shrink:0;
 }
-/* ── MOBILE OVERRIDE ── */
-@media(max-width:768px){
-  .center-title{
-    position:static;
-    top:auto;left:auto;
-    transform:none;
-    width:100%;
-    border-radius:0;
-    border-left:none;
-    border-right:none;
-    border-top:none;
-    border-bottom:1px solid rgba(255,255,255,0.07);
-    background:linear-gradient(180deg,#0A0F1E 0%,#050810 100%);
-    backdrop-filter:none;
-    -webkit-backdrop-filter:none;
-    box-shadow:none;
-    padding:2.5rem 1.5rem 2rem;
-    pointer-events:auto;
-    opacity:1 !important;
-    transition:none;
-  }
-  .screen:hover .center-title{
-    transform:none;
-    opacity:1 !important;
-    background:linear-gradient(180deg,#0A0F1E 0%,#050810 100%);
-  }
+.brand-name{
+  font-family:var(--fh);font-size:17px;font-weight:800;
+  color:#fff;letter-spacing:-0.02em;
+}
+.brand-name span{color:#FFD166}
+
+/* Slightly larger brand when inside center title */
+.center-title .brand{pointer-events:auto;margin-bottom:2px;}
+.center-title .brand-box{width:32px;height:32px;border-radius:8px;font-size:13px}
+.center-title .brand-name{font-size:17px}
+
+.ct-divider-line{
+  width:100%;height:1px;
+  background:rgba(255,255,255,0.08);
+  margin:2px 0;
 }
 
 .ct-tag{
@@ -292,7 +271,7 @@ html,body{
 
 .ct-h{
   font-family:var(--fh);
-  font-size:clamp(28px,2.8vw,42px);
+  font-size:clamp(26px,2.6vw,40px);
   font-weight:800;color:rgba(255,255,255,0.9);
   letter-spacing:-0.03em;text-align:center;
   line-height:1.1;
@@ -312,13 +291,13 @@ html,body{
   padding:5px 14px 5px 8px;
   border:1px solid rgba(201,152,44,0.25);border-radius:100px;
   background:rgba(201,152,44,0.07);
-  margin-top:6px;
+  margin-top:4px;
 }
-.ct-dot{width:6px;height:6px;border-radius:50%;background:#FFD166;animation:blink 2.2s infinite}
+.ct-dot{width:6px;height:6px;border-radius:50%;background:#FFD166;animation:blink 2.2s infinite;flex-shrink:0;}
 @keyframes blink{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(255,209,102,0.5)}55%{opacity:.6;box-shadow:0 0 0 7px rgba(255,209,102,0)}}
 .ct-pill-txt{font-family:var(--fm);font-size:10px;color:rgba(255,209,102,0.8);letter-spacing:0.06em}
 
-/* ââ HOVER HINT (bottom center) ââ */
+/* —— HOVER HINT (bottom center) —— */
 .hover-hint{
   position:fixed;bottom:1.75rem;left:50%;
   transform:translateX(-50%);
@@ -331,33 +310,28 @@ html,body{
 .screen:hover .hover-hint{opacity:.32}
 .hint-line{width:28px;height:1px;background:rgba(255,255,255,0.15)}
 
-/* ââ PANEL-SPECIFIC COLORS ââ */
-/* Blue â Cognisive */
+/* —— PANEL-SPECIFIC COLORS —— */
 .p1-accent{background:linear-gradient(90deg,#3B82F6,#60A5FA)}
 .p1-sector{background:rgba(59,130,246,0.12);color:#60A5FA;border:1px solid rgba(59,130,246,0.2)}
 .p1-link{background:rgba(59,130,246,0.08);border-color:rgba(59,130,246,0.25);color:#93C5FD}
 .p1-link:hover{background:rgba(59,130,246,0.18) !important;border-color:rgba(59,130,246,0.5) !important}
 
-/* Teal â Kloud Course */
 .p2-accent{background:linear-gradient(90deg,#10B981,#34D399)}
 .p2-sector{background:rgba(16,185,129,0.12);color:#34D399;border:1px solid rgba(16,185,129,0.2)}
 .p2-link{background:rgba(16,185,129,0.08);border-color:rgba(16,185,129,0.25);color:#6EE7B7}
 .p2-link:hover{background:rgba(16,185,129,0.18) !important;border-color:rgba(16,185,129,0.5) !important}
 
-/* Amber â Agro */
 .p3-accent{background:linear-gradient(90deg,#F59E0B,#FCD34D)}
 .p3-sector{background:rgba(245,158,11,0.12);color:#FCD34D;border:1px solid rgba(245,158,11,0.2)}
 .p3-link{background:rgba(245,158,11,0.08);border-color:rgba(245,158,11,0.25);color:#FDE68A}
 .p3-link:hover{background:rgba(245,158,11,0.18) !important;border-color:rgba(245,158,11,0.5) !important}
 
-/* Green â Poultry */
 .p4-accent{background:linear-gradient(90deg,#22C55E,#4ADE80)}
 .p4-sector{background:rgba(34,197,94,0.12);color:#4ADE80;border:1px solid rgba(34,197,94,0.2)}
 .p4-link{background:rgba(34,197,94,0.08);border-color:rgba(34,197,94,0.25);color:#86EFAC}
 .p4-link:hover{background:rgba(34,197,94,0.18) !important;border-color:rgba(34,197,94,0.5) !important}
 
-
-/* ââ CONTACT CTA ââ */
+/* —— CONTACT CTA —— */
 .contact-cta{
   position:fixed;
   right:1.75rem;
@@ -387,45 +361,114 @@ html,body{
   background:#0A0F1E;
 }
 
-/* ââ MOBILE FALLBACK ââ */
+/* —— MOBILE FALLBACK —— */
 @media(max-width:768px){
   html,body{overflow:auto;height:auto}
+
   .screen{
-    display:grid;
-    grid-template-columns:1fr !important;
+    display:flex;
+    flex-direction:column;
+    width:100%;
     height:auto;
   }
+
   .panel{
-    min-height:56vw;
+    min-height:auto;
+    width:100%;
     border-right:none;
     border-bottom:1px solid rgba(255,255,255,0.07);
     transform:none !important;
     filter:none !important;
-
-    justify-content: flex-start;  /* ✅ ADD THIS LINE */
+    padding:0;
+    justify-content:flex-start;
   }
   .panel:last-child{border-bottom:none}
-  .biz-desc{max-height:none !important;opacity:1 !important}
-  .biz-tags{max-height:none !important;opacity:1 !important}
-  .visit-link{opacity:1 !important;transform:none !important}
-  
+
+  .panel-header{
+    position:relative;
+    top:auto;left:auto;right:auto;
+    padding:1rem 1.5rem;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-end;
+    justify-content:center;
+    gap:6px;
+  }
+
+  .panel-num{
+    font-size:9px;
+    color:rgba(255,255,255,0.25);
+  }
+
+  .panel-content{
+    padding:1.25rem 1.5rem 1.75rem;
+  }
+
+  .biz-desc{
+    max-height:none !important;
+    opacity:1 !important;
+    transform:none !important;
+  }
+  .biz-tags{
+    max-height:none !important;
+    opacity:1 !important;
+    transform:none !important;
+  }
+  .visit-link{
+    opacity:1 !important;
+    transform:none !important;
+  }
+
+  .accent-bar{width:60px !important}
+
+  .center-title{
+    position:relative;
+    top:auto;
+    left:auto;
+    transform:none;
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:10px;
+    padding:2.25rem 1.5rem 2rem;
+    border-radius:0;
+    background:linear-gradient(160deg,#0A0F1E 0%,#0D1A3A 60%,#0F2050 100%);
+    border:none;
+    border-bottom:1px solid rgba(255,255,255,0.08);
+    box-shadow:none;
+    backdrop-filter:none;
+    -webkit-backdrop-filter:none;
+    pointer-events:auto;
+    order:-1;
+  }
+
+  .screen:hover .center-title{
+    transform:none;
+    opacity:1;
+    background:linear-gradient(160deg,#0A0F1E 0%,#0D1A3A 60%,#0F2050 100%);
+  }
+
+  .ct-h{
+    font-size:clamp(26px,7vw,36px);
+  }
+
+  .ct-pill-txt{
+    font-size:9px;
+  }
+
   .hover-hint{display:none}
+
   .contact-cta{
-    position:sticky;
+    position:relative;
     right:auto;
     bottom:auto;
-    margin:1rem auto 1.25rem;
+    margin:1.25rem auto;
+    display:flex;
     justify-content:center;
-    width:calc(100% - 2rem);
+    width:calc(100% - 3rem);
     max-width:360px;
   }
-.panel-header{
-  padding:1.25rem 1.5rem;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-}  
-.panel-content{padding:1.5rem}
 }
 </style>
 </head>
@@ -433,13 +476,37 @@ html,body{
 
 <div class="screen">
 
-  <!-- ââ PANEL 1 â KURELA COGNISIVE (Blue) ââ -->
+  <!-- Center floating title -->
+  <div class="center-title">
+
+    <!-- Brand Logo at the top -->
+    <a href="https://kurelagroup.in" class="brand">
+      <div class="brand-box">KG</div>
+      <span class="brand-name">Kurela <span>Group</span></span>
+    </a>
+
+    <div class="ct-divider-line"></div>
+
+    <div class="ct-tag">Group of Companies &nbsp;·&nbsp; Since 2016</div>
+    <div class="ct-line">
+      <div class="ct-divider"></div>
+      <div class="ct-h">Building Future-Ready<br><em>Businesses</em></div>
+      <div class="ct-divider"></div>
+    </div>
+    <div class="ct-sub">Technology &nbsp;·&nbsp; Skilling &nbsp;·&nbsp; Agriculture &nbsp;·&nbsp; Poultry Sciences</div>
+    <div class="ct-pill">
+      <div class="ct-dot"></div>
+      <span class="ct-pill-txt">Agri &amp; Trainings since 2016 &nbsp;·&nbsp; Technology since 2018</span>
+    </div>
+  </div>
+
+  <!-- —— PANEL 1 — KURELA COGNISIVE (Blue) —— -->
   <div class="panel panel-1" data-url="https://kurela.in" role="link" tabindex="0" aria-label="Visit Kurela Cognisive website">
     <div class="glow"></div>
     <div class="grid-lines"></div>
 
     <div class="panel-header">
-      <a href="https://kurelagroup.in" class="brand">
+      <a href="https://kurelagroup.in" class="brand" style="pointer-events:auto;">
         <div class="brand-box">KG</div>
         <span class="brand-name">Kurela <span>Group</span></span>
       </a>
@@ -454,7 +521,7 @@ html,body{
       <div class="accent-bar p1-accent"></div>
       <div class="sector p1-sector">Technology &amp; Skilling</div>
       <div class="biz-name">Kurela<br>Cognisive</div>
-      <div class="biz-desc">Product engineering, cloud services, digital transformation, and industry-aligned skilling â helping institutions, enterprises, and government programs build future-ready technology capabilities.</div>
+      <div class="biz-desc">Product engineering, cloud services, digital transformation, and industry-aligned skilling — helping institutions, enterprises, and government programs build future-ready technology capabilities.</div>
       <div class="biz-tags">
         <span class="tag">Product Engineering</span>
         <span class="tag">Managed Cloud</span>
@@ -463,18 +530,17 @@ html,body{
       </div>
       <a href="https://kurela.in" target="_blank" rel="noopener noreferrer" class="visit-link p1-link">
         kurela.in
-        <span class="visit-link-arr"></span>
+        <span class="visit-link-arr">↗</span>
       </a>
     </div>
   </div>
 
-  <!-- ââ PANEL 2 â KLOUD COURSE (Teal) ââ -->
+  <!-- —— PANEL 2 — KLOUD COURSE (Teal) —— -->
   <div class="panel panel-2" data-url="https://kloudcourse.in" role="link" tabindex="0" aria-label="Visit Kloud Course Academy website">
     <div class="glow"></div>
     <div class="grid-lines"></div>
 
     <div class="panel-header">
-      <span></span>
       <span class="panel-num">02 / 04</span>
     </div>
 
@@ -495,18 +561,17 @@ html,body{
       </div>
       <a href="https://kloudcourse.in" target="_blank" rel="noopener noreferrer" class="visit-link p2-link">
         kloudcourse.in
-        <span class="visit-link-arr"></span>
+        <span class="visit-link-arr">↗</span>
       </a>
     </div>
   </div>
 
-  <!--  PANEL 3 KURELA AGRO FARMS (Amber)  -->
+  <!-- —— PANEL 3 — KURELA AGRO FARMS (Amber) —— -->
   <div class="panel panel-3" data-url="https://www.kurelaagrofarms.com" role="link" tabindex="0" aria-label="Visit Kurela Agro Farms website">
     <div class="glow"></div>
     <div class="grid-lines"></div>
 
     <div class="panel-header">
-      <span></span>
       <span class="panel-num">03 / 04</span>
     </div>
 
@@ -518,7 +583,7 @@ html,body{
       <div class="accent-bar p3-accent"></div>
       <div class="sector p3-sector">Agriculture</div>
       <div class="biz-name">Kurela<br>Agro Farms</div>
-      <div class="biz-desc">Modern horticulture, alternative crops, precision farming, and sustainable agri-enterprise models supporting farmers, landowners, students, and rural entrepreneurs.</div>
+      <div class="biz-desc">Modern horticulture, alternative crops, precision farming, and sustainable agri-enterprise models — supporting farmers, landowners, students, and rural entrepreneurs.</div>
       <div class="biz-tags">
         <span class="tag">Horticulture</span>
         <span class="tag">Precision Farming</span>
@@ -527,18 +592,17 @@ html,body{
       </div>
       <a href="https://www.kurelaagrofarms.com" target="_blank" rel="noopener noreferrer" class="visit-link p3-link">
         kurelaagrofarms.com
-        <span class="visit-link-arr"></span>
+        <span class="visit-link-arr">↗</span>
       </a>
     </div>
   </div>
 
-  <!--  PANEL 4KURELA POULTRY SCIENCES (Green)  -->
+  <!-- —— PANEL 4 — KURELA POULTRY SCIENCES (Green) —— -->
   <div class="panel panel-4" data-url="https://kurelapoultry.com" role="link" tabindex="0" aria-label="Visit Kurela Poultry Sciences website">
     <div class="glow"></div>
     <div class="grid-lines"></div>
 
     <div class="panel-header">
-      <span></span>
       <span class="panel-num">04 / 04</span>
     </div>
 
@@ -550,7 +614,7 @@ html,body{
       <div class="accent-bar p4-accent"></div>
       <div class="sector p4-sector">Poultry Sciences</div>
       <div class="biz-name">Kurela Poultry<br>Sciences</div>
-      <div class="biz-desc">Science-backed poultry farming solutions for EC broiler and layer farms covering shed setup, automation, IoT monitoring, farm operations, and productivity-focused poultry models.</div>
+      <div class="biz-desc">Science-backed poultry farming solutions for EC broiler and layer farms — covering shed setup, automation, IoT monitoring, farm operations, and productivity-focused poultry models.</div>
       <div class="biz-tags">
         <span class="tag">EC Broiler &amp; Layer</span>
         <span class="tag">IoT Management</span>
@@ -559,33 +623,17 @@ html,body{
       </div>
       <a href="https://kurelapoultry.com" target="_blank" rel="noopener noreferrer" class="visit-link p4-link">
         kurelapoultry.com
-        <span class="visit-link-arr"></span>
+        <span class="visit-link-arr">↗</span>
       </a>
     </div>
   </div>
 
-<!-- Center floating title -->
-<div class="center-title">
-  <div class="ct-tag">Kurela Group of Companies Â· Since 2016</div>
-  <div class="ct-line">
-    <div class="ct-divider"></div>
-    <div class="ct-h">Building Future-Ready<br><em>Businesses</em></div>
-    <div class="ct-divider"></div>
+  <!-- Bottom hint -->
+  <div class="hover-hint">
+    <div class="hint-line"></div>
+    hover to explore each vertical
+    <div class="hint-line"></div>
   </div>
-  <div class="ct-sub">Technology &nbsp;Â·&nbsp; Skilling &nbsp;Â·&nbsp; Agriculture &nbsp;Â·&nbsp; Poultry Sciences</div>
-  <div class="ct-pill">
-    <div class="ct-dot"></div>
-    <span class="ct-pill-txt">Agri &amp; Trainings since 2016 Â· Technology since 2018</span>
-  </div>
-</div>
-
-<!-- Bottom hint -->
-<div class="hover-hint">
-  <div class="hint-line"></div>
-  hover to explore each vertical
-  <div class="hint-line"></div>
-</div>
-
 
 </div><!-- /screen -->
 
