@@ -34,20 +34,25 @@ html,body{
 ::selection{background:#C9982C;color:#000}
 
 /* ═══════════════════════════════════════
-   GLOBAL TOP HEADER BAR
+   GLOBAL TOP HEADER BAR — fully transparent, left-aligned
 ═══════════════════════════════════════ */
 .site-header{
-  position:fixed;
-  top:0;left:0;right:0;
-  height:var(--header-h);
-  z-index:200;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:rgba(5,8,16,0.80);
-  border-bottom:1px solid rgba(255,255,255,0.08);
-  backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--header-h);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 1.5rem;
+  background: transparent;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 .site-header .brand{
   display:flex;
@@ -56,17 +61,27 @@ html,body{
   text-decoration:none;
 }
 .site-header .brand-box{
-  width:34px;height:34px;
+  width:38px;
+  height:38px;
   border-radius:8px;
   background:linear-gradient(135deg,#C9982C,#E8B84B);
-  display:flex;align-items:center;justify-content:center;
-  font-family:var(--fh);font-size:13px;font-weight:800;color:#050810;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:var(--fh);
+  font-size:14px;
+  font-weight:800;
+  color:#050810;
   flex-shrink:0;
-  box-shadow:0 4px 14px rgba(201,152,44,0.32);
+  border:1.5px solid rgba(255,209,102,0.6);
+  box-shadow:0 4px 18px rgba(201,152,44,0.4);
 }
 .site-header .brand-name{
-  font-family:var(--fh);font-size:18px;font-weight:800;
-  color:#fff;letter-spacing:-0.02em;
+  font-family:var(--fh);
+  font-size:20px;
+  font-weight:800;
+  color:#fff;
+  letter-spacing:-0.01em;
   white-space:nowrap;
 }
 .site-header .brand-name span{color:#FFD166}
@@ -302,10 +317,11 @@ html,body{
   html,body{overflow:auto;height:auto}
 
   .site-header{
-    justify-content:center;
+    justify-content:flex-start;
+    padding:0 1.25rem;
   }
-  .site-header .brand-name{font-size:16px}
-  .site-header .brand-box{width:30px;height:30px;font-size:12px}
+  .site-header .brand-name{font-size:17px}
+  .site-header .brand-box{width:32px;height:32px;font-size:13px}
 
   .screen{
     display:flex;flex-direction:column;
@@ -358,7 +374,7 @@ html,body{
 </head>
 <body>
 
-<!-- ═══ SINGLE GLOBAL HEADER — shown on both desktop & mobile ═══ -->
+<!-- ═══ SINGLE GLOBAL HEADER — transparent, left-aligned ═══ -->
 <header class="site-header">
   <a href="https://kurelagroup.in" class="brand">
     <div class="brand-box">KG</div>
@@ -370,7 +386,7 @@ html,body{
 
   <!-- Center title card (floating on desktop, stacked block on mobile) -->
   <div class="center-title">
-    <div class="ct-tag">Group of Companies &nbsp;·&nbsp; Since 2016</div>
+    <div class="ct-tag">Kurela Group of Companies &nbsp;·&nbsp; Since 2016</div>
     <div class="ct-line">
       <div class="ct-divider"></div>
       <div class="ct-h">Building Future-Ready<br><em>Businesses</em></div>
