@@ -23,6 +23,7 @@
   --fh:'Syne',sans-serif;
   --fb:'Space Grotesk',sans-serif;
   --fm:'JetBrains Mono',monospace;
+  --header-h:58px;
 }
 html,body{
   width:100%;height:100%;
@@ -32,10 +33,52 @@ html,body{
 }
 ::selection{background:#C9982C;color:#000}
 
-/* —— FULL SCREEN PANELS —— */
+/* ═══════════════════════════════════════
+   GLOBAL TOP HEADER BAR
+═══════════════════════════════════════ */
+.site-header{
+  position:fixed;
+  top:0;left:0;right:0;
+  height:var(--header-h);
+  z-index:200;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(5,8,16,0.80);
+  border-bottom:1px solid rgba(255,255,255,0.08);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+}
+.site-header .brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  text-decoration:none;
+}
+.site-header .brand-box{
+  width:34px;height:34px;
+  border-radius:8px;
+  background:linear-gradient(135deg,#C9982C,#E8B84B);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--fh);font-size:13px;font-weight:800;color:#050810;
+  flex-shrink:0;
+  box-shadow:0 4px 14px rgba(201,152,44,0.32);
+}
+.site-header .brand-name{
+  font-family:var(--fh);font-size:18px;font-weight:800;
+  color:#fff;letter-spacing:-0.02em;
+  white-space:nowrap;
+}
+.site-header .brand-name span{color:#FFD166}
+
+/* ═══════════════════════════════════════
+   SCREEN + PANELS
+═══════════════════════════════════════ */
 .screen{
   display:grid;
-  width:100vw;height:100vh;
+  width:100vw;
+  height:100vh;
+  padding-top:var(--header-h);
   grid-template-columns:repeat(4,minmax(0,1fr));
   position:relative;
   transition:grid-template-columns 900ms cubic-bezier(0.16,1,0.3,1);
@@ -46,7 +89,6 @@ html,body{
 .screen:has(.panel-3:hover), .screen[data-active="3"]{grid-template-columns:.94fr .94fr 1.48fr .94fr}
 .screen:has(.panel-4:hover), .screen[data-active="4"]{grid-template-columns:.94fr .94fr .94fr 1.48fr}
 
-/* Each panel */
 .panel{
   position:relative;
   min-width:0;
@@ -68,20 +110,17 @@ html,body{
 }
 .screen:hover .panel:not(:hover){filter:brightness(.76) saturate(.88)}
 
-/* Panel backgrounds */
 .panel-1{background:linear-gradient(160deg,#0A0F1E 0%,#0D1A3A 60%,#0F2050 100%)}
 .panel-2{background:linear-gradient(160deg,#061410 0%,#0A2018 60%,#0D2A20 100%)}
 .panel-3{background:linear-gradient(160deg,#140A00 0%,#1E1000 60%,#2A1500 100%)}
 .panel-4{background:linear-gradient(160deg,#060E04 0%,#0A1A08 60%,#0D2410 100%)}
 
-/* Noise overlay */
 .panel::after{
   content:'';position:absolute;inset:0;
   background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
   pointer-events:none;opacity:0.5;z-index:0;
 }
 
-/* Glow blobs */
 .glow{
   position:absolute;border-radius:50%;
   pointer-events:none;z-index:0;
@@ -91,10 +130,8 @@ html,body{
 .panel-2 .glow{width:400px;height:400px;background:radial-gradient(ellipse,rgba(16,185,129,0.15) 0%,transparent 70%);top:-80px;left:-80px}
 .panel-3 .glow{width:400px;height:400px;background:radial-gradient(ellipse,rgba(245,158,11,0.18) 0%,transparent 70%);top:-80px;right:-80px}
 .panel-4 .glow{width:400px;height:400px;background:radial-gradient(ellipse,rgba(34,197,94,0.15) 0%,transparent 70%);top:-80px;left:-60px}
-
 .panel:hover .glow{opacity:1.4;transform:scale(1.2)}
 
-/* Grid lines */
 .grid-lines{
   position:absolute;inset:0;z-index:0;pointer-events:none;
   background-image:
@@ -105,15 +142,12 @@ html,body{
 }
 .panel:hover .grid-lines{opacity:1}
 
-/* —— HEADER BLOCK (top of each panel) —— */
 .panel-header{
   position:absolute;top:0;left:0;right:0;
-  padding:1.75rem 2rem;
-  display:flex;align-items:center;justify-content:space-between;
+  padding:1.25rem 1.5rem;
+  display:flex;align-items:center;justify-content:flex-end;
   z-index:10;
 }
-
-/* Panel number */
 .panel-num{
   font-family:var(--fm);font-size:10px;
   letter-spacing:0.1em;color:rgba(255,255,255,0.2);
@@ -121,371 +155,221 @@ html,body{
 }
 .panel:hover .panel-num{color:rgba(255,255,255,0.5)}
 
-/* —— CONTENT (bottom) —— */
+/* ═══ PANEL CONTENT ═══ */
 .panel-content{
   position:relative;z-index:10;
   display:flex;flex-direction:column;gap:1.25rem;
 }
-
-/* Color accent bar */
-.accent-bar{
-  width:32px;height:3px;border-radius:2px;
-  transition:width 0.4s ease;
-}
+.accent-bar{width:32px;height:3px;border-radius:2px;transition:width 0.4s ease}
 .panel:hover .accent-bar{width:60px}
-
-/* Sector pill */
 .sector{
   display:inline-flex;align-items:center;gap:6px;
   font-family:var(--fm);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;
-  padding:4px 10px;border-radius:4px;
-  width:fit-content;
+  padding:4px 10px;border-radius:4px;width:fit-content;
 }
-
-/* Biz name */
 .biz-name{
-  font-family:var(--fh);
-  font-size:clamp(20px,1.7vw,26px);
-  font-weight:800;color:#fff;
-  line-height:1.15;letter-spacing:-0.03em;
+  font-family:var(--fh);font-size:clamp(20px,1.7vw,26px);
+  font-weight:800;color:#fff;line-height:1.15;letter-spacing:-0.03em;
 }
-
-/* Description — hidden, slides up on hover */
 .biz-desc{
   font-size:13px;color:rgba(255,255,255,0.55);
   font-weight:300;line-height:1.75;
-  max-height:0;overflow:hidden;
-  opacity:0;
-  transform:translateY(10px);
+  max-height:0;overflow:hidden;opacity:0;transform:translateY(10px);
   transition:max-height 650ms cubic-bezier(0.16,1,0.3,1), opacity 520ms ease 90ms, transform 650ms cubic-bezier(0.16,1,0.3,1);
 }
 .panel:hover .biz-desc{max-height:140px;opacity:1;transform:translateY(0)}
-
-/* Tags */
 .biz-tags{
   display:flex;flex-wrap:wrap;gap:5px;
-  max-height:0;overflow:hidden;opacity:0;
-  transform:translateY(10px);
+  max-height:0;overflow:hidden;opacity:0;transform:translateY(10px);
   transition:max-height 650ms cubic-bezier(0.16,1,0.3,1), opacity 520ms ease 140ms, transform 650ms cubic-bezier(0.16,1,0.3,1);
 }
 .panel:hover .biz-tags{max-height:72px;opacity:1;transform:translateY(0)}
-.tag{
-  font-size:10.5px;padding:3px 9px;border-radius:100px;
-  border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.4);
-}
-
-/* CTA link */
+.tag{font-size:10.5px;padding:3px 9px;border-radius:100px;border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.4)}
 .visit-link{
   display:inline-flex;align-items:center;gap:8px;
-  padding:10px 18px;border-radius:7px;
-  text-decoration:none;
-  font-family:var(--fm);font-size:11.5px;font-weight:400;
-  letter-spacing:0.04em;
-  border:1px solid rgba(255,255,255,0.12);
-  color:#fff;
-  width:fit-content;
+  padding:10px 18px;border-radius:7px;text-decoration:none;
+  font-family:var(--fm);font-size:11.5px;font-weight:400;letter-spacing:0.04em;
+  border:1px solid rgba(255,255,255,0.12);color:#fff;width:fit-content;
   transition:opacity 520ms ease 180ms, transform 650ms cubic-bezier(0.16,1,0.3,1), background 280ms ease, border-color 280ms ease;
-  transform:translateY(12px);
-  opacity:0;
+  transform:translateY(12px);opacity:0;
 }
 .panel:hover .visit-link{opacity:1;transform:translateY(0)}
-.visit-link:hover{
-  background:rgba(255,255,255,0.08);
-  border-color:rgba(255,255,255,0.25);
-}
+.visit-link:hover{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.25)}
 .visit-link-arr{font-size:14px;line-height:1;transition:transform 0.25s}
 .visit-link:hover .visit-link-arr{transform:translate(2px,-2px)}
-
-/* Vertical icon large */
 .biz-icon-lg{
-  position:absolute;
-  right:2rem;
-  bottom:2.5rem;
-  opacity:0.06;
-  transition:opacity 0.4s,transform 0.4s;
-  pointer-events:none;
-  z-index:1;
+  position:absolute;right:2rem;bottom:2.5rem;
+  opacity:0.06;transition:opacity 0.4s,transform 0.4s;
+  pointer-events:none;z-index:1;
 }
 .panel:hover .biz-icon-lg{opacity:0.12;transform:scale(1.1)}
 .biz-icon-lg svg{width:80px;height:80px}
 
-/* —— CENTER TITLE (over panels) —— */
+/* ═══ CENTER TITLE ═══ */
 .center-title{
   position:fixed;
-  top:50%;left:50%;
+  top:calc(50% + var(--header-h) / 2);
+  left:50%;
   transform:translate(-50%,-50%);
   z-index:50;
   pointer-events:none;
   display:flex;flex-direction:column;align-items:center;gap:8px;
-  padding:1.25rem 1.5rem 1.1rem;
+  padding:1.25rem 1.75rem 1.15rem;
   border-radius:22px;
-  background:linear-gradient(180deg,rgba(5,8,16,0.62),rgba(5,8,16,0.34));
+  background:linear-gradient(180deg,rgba(5,8,16,0.65),rgba(5,8,16,0.38));
   border:1px solid rgba(255,255,255,0.08);
   box-shadow:0 28px 90px rgba(0,0,0,0.28);
   backdrop-filter:blur(16px);
   -webkit-backdrop-filter:blur(16px);
   transition:opacity 650ms ease, transform 650ms cubic-bezier(0.16,1,0.3,1), background 650ms ease;
 }
-.screen:hover .center-title{opacity:.94;transform:translate(-50%,-66%) scale(.93);background:linear-gradient(180deg,rgba(5,8,16,0.52),rgba(5,8,16,0.26))}
-
-/* Brand logo — used in panel-1 header AND center title */
-.brand{
-  display:flex;align-items:center;gap:9px;
-  text-decoration:none;
-  pointer-events:auto;
-  margin-bottom:2px;
+.screen:hover .center-title{
+  opacity:.94;
+  transform:translate(-50%,calc(-50% - 22px)) scale(.93);
+  background:linear-gradient(180deg,rgba(5,8,16,0.52),rgba(5,8,16,0.26));
 }
-.brand-box{
-  width:32px;height:32px;
-  border-radius:8px;
-  background:linear-gradient(135deg,#C9982C,#E8B84B);
-  display:flex;align-items:center;justify-content:center;
-  font-family:var(--fh);font-size:13px;font-weight:800;color:#050810;
-  flex-shrink:0;
-}
-.brand-name{
-  font-family:var(--fh);font-size:17px;font-weight:800;
-  color:#fff;letter-spacing:-0.02em;
-}
-.brand-name span{color:#FFD166}
-
-/* Slightly larger brand when inside center title */
-.center-title .brand{pointer-events:auto;margin-bottom:2px;}
-.center-title .brand-box{width:32px;height:32px;border-radius:8px;font-size:13px}
-.center-title .brand-name{font-size:17px}
-
-.ct-divider-line{
-  width:100%;height:1px;
-  background:rgba(255,255,255,0.08);
-  margin:2px 0;
-}
-
-.ct-tag{
-  font-family:var(--fm);font-size:10px;letter-spacing:0.15em;
-  color:rgba(255,255,255,0.35);text-transform:uppercase;
-}
-.ct-line{
-  display:flex;align-items:center;gap:12px;
-}
+.ct-tag{font-family:var(--fm);font-size:10px;letter-spacing:0.15em;color:rgba(255,255,255,0.35);text-transform:uppercase}
+.ct-line{display:flex;align-items:center;gap:12px}
 .ct-divider{width:40px;height:1px;background:rgba(255,255,255,0.15)}
-
 .ct-h{
-  font-family:var(--fh);
-  font-size:clamp(26px,2.6vw,40px);
-  font-weight:800;color:rgba(255,255,255,0.9);
-  letter-spacing:-0.03em;text-align:center;
-  line-height:1.1;
+  font-family:var(--fh);font-size:clamp(26px,2.6vw,40px);font-weight:800;
+  color:rgba(255,255,255,0.9);letter-spacing:-0.03em;text-align:center;line-height:1.1;
 }
 .ct-h em{
   font-style:normal;
   background:linear-gradient(90deg,#C9982C,#FFD166);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  background-clip:text;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
 }
-.ct-sub{
-  font-size:12px;color:rgba(255,255,255,0.3);
-  font-weight:300;text-align:center;letter-spacing:0.02em;
-}
+.ct-sub{font-size:12px;color:rgba(255,255,255,0.3);font-weight:300;text-align:center;letter-spacing:0.02em}
 .ct-pill{
   display:flex;align-items:center;gap:7px;
   padding:5px 14px 5px 8px;
   border:1px solid rgba(201,152,44,0.25);border-radius:100px;
-  background:rgba(201,152,44,0.07);
-  margin-top:4px;
+  background:rgba(201,152,44,0.07);margin-top:4px;
 }
-.ct-dot{width:6px;height:6px;border-radius:50%;background:#FFD166;animation:blink 2.2s infinite;flex-shrink:0;}
+.ct-dot{width:6px;height:6px;border-radius:50%;background:#FFD166;animation:blink 2.2s infinite;flex-shrink:0}
 @keyframes blink{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(255,209,102,0.5)}55%{opacity:.6;box-shadow:0 0 0 7px rgba(255,209,102,0)}}
 .ct-pill-txt{font-family:var(--fm);font-size:10px;color:rgba(255,209,102,0.8);letter-spacing:0.06em}
 
-/* —— HOVER HINT (bottom center) —— */
+/* ═══ HOVER HINT ═══ */
 .hover-hint{
-  position:fixed;bottom:1.75rem;left:50%;
-  transform:translateX(-50%);
+  position:fixed;bottom:1.75rem;left:50%;transform:translateX(-50%);
   z-index:50;pointer-events:none;
-  font-family:var(--fm);font-size:10px;
-  color:rgba(255,255,255,0.2);letter-spacing:0.1em;text-transform:uppercase;
-  display:flex;align-items:center;gap:10px;
-  transition:opacity 0.4s;
+  font-family:var(--fm);font-size:10px;color:rgba(255,255,255,0.2);
+  letter-spacing:0.1em;text-transform:uppercase;
+  display:flex;align-items:center;gap:10px;transition:opacity 0.4s;
 }
 .screen:hover .hover-hint{opacity:.32}
 .hint-line{width:28px;height:1px;background:rgba(255,255,255,0.15)}
 
-/* —— PANEL-SPECIFIC COLORS —— */
+/* ═══ COLORS ═══ */
 .p1-accent{background:linear-gradient(90deg,#3B82F6,#60A5FA)}
 .p1-sector{background:rgba(59,130,246,0.12);color:#60A5FA;border:1px solid rgba(59,130,246,0.2)}
 .p1-link{background:rgba(59,130,246,0.08);border-color:rgba(59,130,246,0.25);color:#93C5FD}
 .p1-link:hover{background:rgba(59,130,246,0.18) !important;border-color:rgba(59,130,246,0.5) !important}
-
 .p2-accent{background:linear-gradient(90deg,#10B981,#34D399)}
 .p2-sector{background:rgba(16,185,129,0.12);color:#34D399;border:1px solid rgba(16,185,129,0.2)}
 .p2-link{background:rgba(16,185,129,0.08);border-color:rgba(16,185,129,0.25);color:#6EE7B7}
 .p2-link:hover{background:rgba(16,185,129,0.18) !important;border-color:rgba(16,185,129,0.5) !important}
-
 .p3-accent{background:linear-gradient(90deg,#F59E0B,#FCD34D)}
 .p3-sector{background:rgba(245,158,11,0.12);color:#FCD34D;border:1px solid rgba(245,158,11,0.2)}
 .p3-link{background:rgba(245,158,11,0.08);border-color:rgba(245,158,11,0.25);color:#FDE68A}
 .p3-link:hover{background:rgba(245,158,11,0.18) !important;border-color:rgba(245,158,11,0.5) !important}
-
 .p4-accent{background:linear-gradient(90deg,#22C55E,#4ADE80)}
 .p4-sector{background:rgba(34,197,94,0.12);color:#4ADE80;border:1px solid rgba(34,197,94,0.2)}
 .p4-link{background:rgba(34,197,94,0.08);border-color:rgba(34,197,94,0.25);color:#86EFAC}
 .p4-link:hover{background:rgba(34,197,94,0.18) !important;border-color:rgba(34,197,94,0.5) !important}
 
-/* —— CONTACT CTA —— */
+/* ═══ CONTACT CTA ═══ */
 .contact-cta{
-  position:fixed;
-  right:1.75rem;
-  bottom:1.75rem;
-  z-index:80;
-  display:inline-flex;
-  align-items:center;
-  gap:9px;
-  padding:11px 18px;
-  border-radius:999px;
-  text-decoration:none;
-  font-family:var(--fm);
-  font-size:11px;
-  letter-spacing:0.04em;
-  color:#080B12;
-  background:linear-gradient(135deg,#C9982C,#FFD166);
+  position:fixed;right:1.75rem;bottom:1.75rem;z-index:300;
+  display:inline-flex;align-items:center;gap:9px;
+  padding:11px 18px;border-radius:999px;text-decoration:none;
+  font-family:var(--fm);font-size:11px;letter-spacing:0.04em;
+  color:#080B12;background:linear-gradient(135deg,#C9982C,#FFD166);
   border:1px solid rgba(255,209,102,0.45);
   box-shadow:0 18px 50px rgba(0,0,0,0.35);
   transition:transform 0.25s ease, box-shadow 0.25s ease;
 }
-.contact-cta:hover{
-  transform:translateY(-2px);
-  box-shadow:0 24px 70px rgba(201,152,44,0.22);
-}
-.contact-dot{
-  width:7px;height:7px;border-radius:50%;
-  background:#0A0F1E;
-}
+.contact-cta:hover{transform:translateY(-2px);box-shadow:0 24px 70px rgba(201,152,44,0.22)}
+.contact-dot{width:7px;height:7px;border-radius:50%;background:#0A0F1E}
 
-/* —— MOBILE FALLBACK —— */
+/* ═══════════════════════════════════════
+   MOBILE
+═══════════════════════════════════════ */
 @media(max-width:768px){
+  :root{--header-h:54px}
   html,body{overflow:auto;height:auto}
 
+  .site-header{
+    justify-content:center;
+  }
+  .site-header .brand-name{font-size:16px}
+  .site-header .brand-box{width:30px;height:30px;font-size:12px}
+
   .screen{
-    display:flex;
-    flex-direction:column;
-    width:100%;
-    height:auto;
+    display:flex;flex-direction:column;
+    width:100%;height:auto;
+    padding-top:0;
+    margin-top:var(--header-h);
   }
 
   .panel{
-    min-height:auto;
-    width:100%;
-    border-right:none;
-    border-bottom:1px solid rgba(255,255,255,0.07);
-    transform:none !important;
-    filter:none !important;
-    padding:0;
-    justify-content:flex-start;
+    min-height:auto;width:100%;
+    border-right:none;border-bottom:1px solid rgba(255,255,255,0.07);
+    transform:none !important;filter:none !important;
+    padding:0;justify-content:flex-start;
   }
   .panel:last-child{border-bottom:none}
 
-  .panel-header{
-    position:relative;
-    top:auto;left:auto;right:auto;
-    padding:1rem 1.5rem;
-    display:flex;
-    flex-direction:column;
-    align-items:flex-end;
-    justify-content:center;
-    gap:6px;
-  }
+  .panel-header{padding:1rem 1.5rem;justify-content:flex-end}
+  .panel-content{padding:1.25rem 1.5rem 1.75rem}
 
-  .panel-num{
-    font-size:9px;
-    color:rgba(255,255,255,0.25);
-  }
-
-  .panel-content{
-    padding:1.25rem 1.5rem 1.75rem;
-  }
-
-  .biz-desc{
-    max-height:none !important;
-    opacity:1 !important;
-    transform:none !important;
-  }
-  .biz-tags{
-    max-height:none !important;
-    opacity:1 !important;
-    transform:none !important;
-  }
-  .visit-link{
-    opacity:1 !important;
-    transform:none !important;
-  }
-
+  .biz-desc{max-height:none !important;opacity:1 !important;transform:none !important}
+  .biz-tags{max-height:none !important;opacity:1 !important;transform:none !important}
+  .visit-link{opacity:1 !important;transform:none !important}
   .accent-bar{width:60px !important}
 
   .center-title{
     position:relative;
-    top:auto;
-    left:auto;
-    transform:none;
-    width:100%;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:10px;
-    padding:2.25rem 1.5rem 2rem;
-    border-radius:0;
+    top:auto;left:auto;transform:none;
+    width:100%;border-radius:0;
     background:linear-gradient(160deg,#0A0F1E 0%,#0D1A3A 60%,#0F2050 100%);
-    border:none;
-    border-bottom:1px solid rgba(255,255,255,0.08);
-    box-shadow:none;
-    backdrop-filter:none;
-    -webkit-backdrop-filter:none;
-    pointer-events:auto;
-    order:-1;
+    border:none;border-bottom:1px solid rgba(255,255,255,0.08);
+    box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;
+    pointer-events:auto;padding:2rem 1.5rem;order:-1;
   }
-
   .screen:hover .center-title{
-    transform:none;
-    opacity:1;
+    transform:none;opacity:1;
     background:linear-gradient(160deg,#0A0F1E 0%,#0D1A3A 60%,#0F2050 100%);
   }
-
-  .ct-h{
-    font-size:clamp(26px,7vw,36px);
-  }
-
-  .ct-pill-txt{
-    font-size:9px;
-  }
+  .ct-h{font-size:clamp(24px,7vw,34px)}
+  .ct-pill-txt{font-size:9px}
 
   .hover-hint{display:none}
 
   .contact-cta{
-    position:relative;
-    right:auto;
-    bottom:auto;
-    margin:1.25rem auto;
-    display:flex;
-    justify-content:center;
-    width:calc(100% - 3rem);
-    max-width:360px;
+    position:relative;right:auto;bottom:auto;
+    margin:1.25rem auto;display:flex;justify-content:center;
+    width:calc(100% - 3rem);max-width:360px;
   }
 }
 </style>
 </head>
 <body>
 
+<!-- ═══ SINGLE GLOBAL HEADER — shown on both desktop & mobile ═══ -->
+<header class="site-header">
+  <a href="https://kurelagroup.in" class="brand">
+    <div class="brand-box">KG</div>
+    <span class="brand-name">Kurela <span>Group</span></span>
+  </a>
+</header>
+
 <div class="screen">
 
-  <!-- Center floating title -->
+  <!-- Center title card (floating on desktop, stacked block on mobile) -->
   <div class="center-title">
-
-    <!-- Brand Logo at the top -->
-    <a href="https://kurelagroup.in" class="brand">
-      
-    </a>
-
-    <div class="ct-divider-line"></div>
-
     <div class="ct-tag">Group of Companies &nbsp;·&nbsp; Since 2016</div>
     <div class="ct-line">
       <div class="ct-divider"></div>
@@ -499,23 +383,14 @@ html,body{
     </div>
   </div>
 
-  <!-- —— PANEL 1 — KURELA COGNISIVE (Blue) —— -->
+  <!-- PANEL 1 — KURELA COGNISIVE -->
   <div class="panel panel-1" data-url="https://kurela.in" role="link" tabindex="0" aria-label="Visit Kurela Cognisive website">
     <div class="glow"></div>
     <div class="grid-lines"></div>
-
-    <div class="panel-header">
-      <a href="https://kurelagroup.in" class="brand" style="pointer-events:auto;">
-        <div class="brand-box">KG</div>
-        <span class="brand-name">Kurela <span>Group</span></span>
-      </a>
-      <span class="panel-num">01 / 04</span>
-    </div>
-
+    <div class="panel-header"><span class="panel-num">01 / 04</span></div>
     <div class="biz-icon-lg">
       <svg viewBox="0 0 80 80" fill="none"><rect x="4" y="4" width="32" height="32" rx="6" stroke="#3B82F6" stroke-width="2"/><rect x="44" y="4" width="32" height="32" rx="6" stroke="#3B82F6" stroke-width="2"/><rect x="4" y="44" width="32" height="32" rx="6" stroke="#3B82F6" stroke-width="2"/><rect x="44" y="44" width="32" height="32" rx="6" stroke="#3B82F6" stroke-width="2"/></svg>
     </div>
-
     <div class="panel-content">
       <div class="accent-bar p1-accent"></div>
       <div class="sector p1-sector">Technology &amp; Skilling</div>
@@ -527,26 +402,18 @@ html,body{
         <span class="tag">nasscom Partner</span>
         <span class="tag">Academia Skilling</span>
       </div>
-      <a href="https://kurela.in" target="_blank" rel="noopener noreferrer" class="visit-link p1-link">
-        kurela.in
-        <span class="visit-link-arr">↗</span>
-      </a>
+      <a href="https://kurela.in" target="_blank" rel="noopener noreferrer" class="visit-link p1-link">kurela.in <span class="visit-link-arr">↗</span></a>
     </div>
   </div>
 
-  <!-- —— PANEL 2 — KLOUD COURSE (Teal) —— -->
+  <!-- PANEL 2 — KLOUD COURSE -->
   <div class="panel panel-2" data-url="https://kloudcourse.in" role="link" tabindex="0" aria-label="Visit Kloud Course Academy website">
     <div class="glow"></div>
     <div class="grid-lines"></div>
-
-    <div class="panel-header">
-      <span class="panel-num">02 / 04</span>
-    </div>
-
+    <div class="panel-header"><span class="panel-num">02 / 04</span></div>
     <div class="biz-icon-lg">
       <svg viewBox="0 0 80 80" fill="none"><path d="M40 8L8 26v28l32 18 32-18V26L40 8z" stroke="#10B981" stroke-width="2" stroke-linejoin="round"/><path d="M8 26l32 18 32-18" stroke="#10B981" stroke-width="2"/><path d="M40 44v28" stroke="#10B981" stroke-width="2"/></svg>
     </div>
-
     <div class="panel-content">
       <div class="accent-bar p2-accent"></div>
       <div class="sector p2-sector">EdTech Platform</div>
@@ -558,26 +425,18 @@ html,body{
         <span class="tag">Lab Simulations</span>
         <span class="tag">Zero to Placement</span>
       </div>
-      <a href="https://kloudcourse.in" target="_blank" rel="noopener noreferrer" class="visit-link p2-link">
-        kloudcourse.in
-        <span class="visit-link-arr">↗</span>
-      </a>
+      <a href="https://kloudcourse.in" target="_blank" rel="noopener noreferrer" class="visit-link p2-link">kloudcourse.in <span class="visit-link-arr">↗</span></a>
     </div>
   </div>
 
-  <!-- —— PANEL 3 — KURELA AGRO FARMS (Amber) —— -->
+  <!-- PANEL 3 — KURELA AGRO FARMS -->
   <div class="panel panel-3" data-url="https://www.kurelaagrofarms.com" role="link" tabindex="0" aria-label="Visit Kurela Agro Farms website">
     <div class="glow"></div>
     <div class="grid-lines"></div>
-
-    <div class="panel-header">
-      <span class="panel-num">03 / 04</span>
-    </div>
-
+    <div class="panel-header"><span class="panel-num">03 / 04</span></div>
     <div class="biz-icon-lg">
       <svg viewBox="0 0 80 80" fill="none"><path d="M40 6C40 6 18 26 18 44a22 22 0 0044 0c0-18-22-38-22-38z" stroke="#F59E0B" stroke-width="2" stroke-linejoin="round"/><path d="M40 54v20M32 74h16" stroke="#F59E0B" stroke-width="2" stroke-linecap="round"/></svg>
     </div>
-
     <div class="panel-content">
       <div class="accent-bar p3-accent"></div>
       <div class="sector p3-sector">Agriculture</div>
@@ -589,26 +448,18 @@ html,body{
         <span class="tag">Alternative Crops</span>
         <span class="tag">Rural Enterprise</span>
       </div>
-      <a href="https://www.kurelaagrofarms.com" target="_blank" rel="noopener noreferrer" class="visit-link p3-link">
-        kurelaagrofarms.com
-        <span class="visit-link-arr">↗</span>
-      </a>
+      <a href="https://www.kurelaagrofarms.com" target="_blank" rel="noopener noreferrer" class="visit-link p3-link">kurelaagrofarms.com <span class="visit-link-arr">↗</span></a>
     </div>
   </div>
 
-  <!-- —— PANEL 4 — KURELA POULTRY SCIENCES (Green) —— -->
+  <!-- PANEL 4 — KURELA POULTRY SCIENCES -->
   <div class="panel panel-4" data-url="https://kurelapoultry.com" role="link" tabindex="0" aria-label="Visit Kurela Poultry Sciences website">
     <div class="glow"></div>
     <div class="grid-lines"></div>
-
-    <div class="panel-header">
-      <span class="panel-num">04 / 04</span>
-    </div>
-
+    <div class="panel-header"><span class="panel-num">04 / 04</span></div>
     <div class="biz-icon-lg">
       <svg viewBox="0 0 80 80" fill="none"><ellipse cx="40" cy="30" rx="22" ry="18" stroke="#22C55E" stroke-width="2"/><path d="M18 42c0 12 10 22 22 22s22-10 22-22" stroke="#22C55E" stroke-width="2" stroke-linecap="round"/><path d="M30 64c-1.5 5-3 7-3 7M50 64c1.5 5 3 7 3 7" stroke="#22C55E" stroke-width="2" stroke-linecap="round"/></svg>
     </div>
-
     <div class="panel-content">
       <div class="accent-bar p4-accent"></div>
       <div class="sector p4-sector">Poultry Sciences</div>
@@ -620,23 +471,18 @@ html,body{
         <span class="tag">Full Shed Setup</span>
         <span class="tag">Breeder Sourcing</span>
       </div>
-      <a href="https://kurelapoultry.com" target="_blank" rel="noopener noreferrer" class="visit-link p4-link">
-        kurelapoultry.com
-        <span class="visit-link-arr">↗</span>
-      </a>
+      <a href="https://kurelapoultry.com" target="_blank" rel="noopener noreferrer" class="visit-link p4-link">kurelapoultry.com <span class="visit-link-arr">↗</span></a>
     </div>
   </div>
 
-  <!-- Bottom hint -->
   <div class="hover-hint">
     <div class="hint-line"></div>
     hover to explore each vertical
     <div class="hint-line"></div>
   </div>
 
-</div><!-- /screen -->
+</div>
 
-<!-- Contact CTA -->
 <a class="contact-cta" href="mailto:contact@kurela.in?subject=Kurela%20Group%20Enquiry" aria-label="Contact Kurela Group">
   <span class="contact-dot"></span>
   Contact Kurela Group
@@ -651,26 +497,19 @@ document.querySelectorAll('.panel').forEach((panel, index) => {
   panel.addEventListener('mouseleave', () => {
     if (screen) screen.removeAttribute('data-active');
   });
-
   panel.addEventListener('click', (event) => {
     if (event.target.closest('a')) return;
     const url = panel.getAttribute('data-url');
-    if (url) {
-      window.open(url, '_blank', 'noopener,noreferrer');
-    }
+    if (url) window.open(url, '_blank', 'noopener,noreferrer');
   });
-
   panel.addEventListener('keydown', (event) => {
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault();
       const url = panel.getAttribute('data-url');
-      if (url) {
-        window.open(url, '_blank', 'noopener,noreferrer');
-      }
+      if (url) window.open(url, '_blank', 'noopener,noreferrer');
     }
   });
 });
 </script>
-
 </body>
 </html>
